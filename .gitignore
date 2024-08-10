@@ -31,8 +31,8 @@ yarn-debug.log
 yarn-error.log
 
 # React/Build output
-/build
-/dist
+#/build
+#/dist
 
 # IDEs and editors
 .idea/
