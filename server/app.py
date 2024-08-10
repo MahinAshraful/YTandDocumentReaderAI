@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify
-from dotenv import load_dotenv
 from flask_cors import CORS
 import main3
 import main4
