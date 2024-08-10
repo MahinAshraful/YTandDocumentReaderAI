@@ -10,7 +10,7 @@ CORS(app)
 client_folder = os.path.join(os.getcwd(),"..","client")
 dist_folder = os.path.join(client_folder,"dist")
 
-@app.route("/", defaults={"filename:"""})
+@app.route("/", defaults={"filename": ""})
 @app.route("/<path:filename>")
 def index(filename):
     if not filename:
