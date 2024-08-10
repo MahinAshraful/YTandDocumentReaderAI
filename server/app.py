@@ -11,11 +11,6 @@ client_folder = os.path.join(os.getcwd(),"..","client")
 dist_folder = os.path.join(client_folder,"dist")
 
 @app.route("/", defaults={"filename": ""})
-@app.route("/<path:filename>")
-def index(filename):
-    if not filename:
-        filename = "index.html"
-    return send_from_directory(dist_folder,filename)
 
 @app.route('/perform_pdf_rag', methods=['POST'])
 def pdf_link_endpoint():
