@@ -28,8 +28,8 @@ def perform_yt_rag(query, link):
             tokens = tokenizer.encode(text, disallowed_special=())
             return len(tokens)
         return RecursiveCharacterTextSplitter(
-            chunk_size=2000,
-            chunk_overlap=100,
+            chunk_size=1500,
+            chunk_overlap=75,
             length_function=tiktoken_len,
             separators=["\n\n", "\n", " ", ""]
         )
