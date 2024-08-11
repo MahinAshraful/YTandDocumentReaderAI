@@ -73,7 +73,7 @@ def perform_yt_rag(query, link):
     def get_openai_answer(augmented_query):
         primer = """You are a personal assistant. Answer any questions I have about the Youtube Video provided."""
         res = openai_client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-4",
             messages=[
                 {"role": "system", "content": primer},
                 {"role": "user", "content": augmented_query}

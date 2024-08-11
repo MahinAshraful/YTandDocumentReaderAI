@@ -73,7 +73,7 @@ def perform_pdf_rag(query, pdf_path):
     def get_openai_answer(augmented_query):
         primer = """You are a personal assistant. Answer any questions I have about the PDF document provided."""
         res = openai_client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-4",
             messages=[
                 {"role": "system", "content": primer},
                 {"role": "user", "content": augmented_query}
