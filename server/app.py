@@ -5,10 +5,12 @@ import main3
 import main4
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": os.environ.get('ALLOWED_ORIGIN', '*')}})
 
 # Assuming your Flask app is in the 'server' folder
-client_dist_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'client', 'dist'))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+client_dist_folder = os.environ.get('CLIENT_DIST_FOLDER', 
+                                    os.path.abspath(os.path.join(BASE_DIR, '..', 'client', 'dist')))
 
 @app.route("/", defaults={'path': ''})
 @app.route("/<path:path>")
@@ -56,4 +58,5 @@ def rag_endpoint():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
