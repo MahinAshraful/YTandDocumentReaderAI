@@ -35,7 +35,7 @@ function RAGytQueryComponent() {
   };
 
   return (
-    <div className="max-w-4xl p-6 mx-auto bg-white rounded-lg shadow-md">
+    <div className="p-6 mx-auto bg-gray-100 rounded-lg shadow-md">
       <h1 className="mb-6 text-3xl font-bold text-center">Youtube Reader</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
@@ -54,15 +54,15 @@ function RAGytQueryComponent() {
           required
           className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           disabled={isLoading}
           className="w-full px-4 py-2 text-white transition duration-300 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
         >
           {isLoading ? 'Processing...' : 'Submit'}
         </button>
       </form>
-      
+
       {result && (
         <div className="mt-6 animate-fade-in">
           <h3 className="mb-2 text-lg font-semibold">Result:</h3>
@@ -70,7 +70,7 @@ function RAGytQueryComponent() {
         </div>
       )}
 
-      
+
 
       <div className="mt-8">
         <button

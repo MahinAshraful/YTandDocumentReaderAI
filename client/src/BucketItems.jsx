@@ -55,24 +55,34 @@ const BucketItems = () => {
   }
 
   return (
-    <div className="p-6 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
-      <h2 className="mb-4 text-2xl font-semibold text-gray-800 dark:text-white">Bucket Items</h2>
+    <div className="p-6 bg-gray-400 rounded-t-lg shadow-md dark:bg-gray-800">
+      <h2 className="mb-4 text-2xl font-semibold text-white dark:text-white">PDF's Uploaded</h2>
+      <p className="mb-2 text-white">Click "View File" to copy the link to PDF</p>
       {items.length === 0 ? (
         <p className="text-gray-600 dark:text-gray-400">No items found in the bucket.</p>
       ) : (
         <ul className="space-y-4">
           {items.map(item => (
-            <li key={item.name} className="flex items-center justify-between p-4 rounded-md bg-gray-50 dark:bg-gray-700">
+            <li key={item.name} className="flex items-center justify-between p-4 rounded-md bg-gray-100 dark:bg-gray-700">
               <span className="font-medium text-gray-800 dark:text-gray-200">{item.name.substring(14)}</span>
               {item.url ? (
-                <a 
-                  href={item.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 text-white transition duration-300 ease-in-out bg-blue-500 rounded hover:bg-blue-600"
-                >
-                  View File
-                </a>
+                <div>
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 mr-2 text-white transition duration-300 ease-in-out bg-blue-500 rounded hover:bg-blue-600"
+                  >View File
+                  </a>
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 text-white transition duration-300 ease-in-out bg-red-600 rounded hover:bg-red-800"
+                  >Remove
+                  </a>
+                </div>
+
               ) : (
                 <span className="text-red-500 dark:text-red-400">No URL available</span>
               )}

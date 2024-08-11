@@ -43,16 +43,16 @@ function App() {
 
 
   return (
-    <div className={`min-h-screen ${theme === 'dark' ? 'bg-gray-900 text-slate-500' : 'bg-gray-100 text-gray-900'} transition-colors duration-300`}>
+    <div className={`min-h-screen ${theme === 'dark' ? 'bg-gray-900 text-slate-500' : 'bg-gray-300 text-gray-900'} transition-colors duration-300`}>
       <div className="max-w-5xl px-4 py-12 mx-auto sm:px-6 lg:px-8">
         <header className="flex items-center justify-between mb-8">
           <h1 className="text-4xl font-bold">RAG Query System</h1>
-          <button
-            onClick={toggleTheme}
-            className={`p-2 rounded-full ${theme === 'dark' ? 'bg-yellow-400 text-gray-900' : 'bg-gray-800 text-white'}`}
-          >
-            {theme === 'dark' ? '🌞' : '🌙'}
-          </button>
+          <span>
+            <button onClick={toggleTheme} className={`p-2 rounded-full ${theme === 'dark' ? 'bg-yellow-400 text-gray-900' : 'bg-gray-800 text-white'}`}
+            >
+              {theme === 'dark' ? '🌞' : '🌙'}
+            </button>
+          </span>
         </header>
 
         {showIntro && (
@@ -71,14 +71,12 @@ function App() {
           </div>
         )}
 
-      <UploadPDFButton></UploadPDFButton>
+        <UploadPDFButton></UploadPDFButton>
         <br />
-
-        <BucketItems></BucketItems>
-        
-
-
-        <RAGpdfQueryComponent onQuerySubmit={(query) => addRecentQuery(query, 'PDF')} />
+        <div>
+          <BucketItems></BucketItems>
+          <RAGpdfQueryComponent onQuerySubmit={(query) => addRecentQuery(query, 'PDF')} />
+        </div>
         <br />
         <RAGytQueryComponent onQuerySubmit={(query) => addRecentQuery(query, 'YouTube')} />
 
