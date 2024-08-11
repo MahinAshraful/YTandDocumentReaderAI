@@ -48,22 +48,43 @@ const BucketItems = () => {
     fetchBucketItems();
   }, []);
 
+  const deleteItem = async (itemName) => {
+    try {
+      setLoading(true);
+      const { error } = await supabase
+        .storage
+        .from('your-bucket-name')
+        .remove([itemName]);
+
+      if (error) {
+        throw error;
+      }
+
+      // Remove the item from the state after successful deletion
+      setItems(items.filter(item => item.name !== itemName));
+    } catch (error) {
+      console.error('Error deleting item:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (loading) {
     return <div className="flex items-center justify-center h-64">
-      <div className="w-16 h-16 border-t-2 border-b-2 border-blue-500 rounded-full animate-spin"></div>
+      <div className="w-16 h-16 border-t-2 border-b-2 border-blue-600 rounded-full animate-spin"></div>
     </div>;
   }
 
   return (
-    <div className="p-6 bg-gray-400 rounded-t-lg shadow-md dark:bg-gray-800">
-      <h2 className="mb-4 text-2xl font-semibold text-white dark:text-white">PDF's Uploaded</h2>
-      <p className="mb-2 text-white">Click "View File" to copy the link to PDF</p>
+    <div className="p-6 bg-blue-200 rounded-t-lg shadow-md shadow-gray-400 dark:bg-gray-800">
+      <h2 className="mb-4 text-2xl font-semibold text-black dark:text-white">PDF's Uploaded</h2>
+      <p className="mb-2 text-black">Click "View" to copy the link to PDF</p>
       {items.length === 0 ? (
-        <p className="text-gray-600 dark:text-gray-400">No items found in the bucket.</p>
+        <p className="text-gray-800 dark:text-gray-400">No items found in the bucket.</p>
       ) : (
         <ul className="space-y-4">
           {items.map(item => (
-            <li key={item.name} className="flex items-center justify-between p-4 rounded-md bg-gray-100 dark:bg-gray-700">
+            <li key={item.name} className="flex items-center justify-between p-4 rounded-md bg-gray-100 dark:bg-gray-600">
               <span className="font-medium text-gray-800 dark:text-gray-200">{item.name.substring(14)}</span>
               {item.url ? (
                 <div>
@@ -71,20 +92,18 @@ const BucketItems = () => {
                     href={item.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 mr-2 text-white transition duration-300 ease-in-out bg-blue-500 rounded hover:bg-blue-600"
-                  >View File
+                    className="p-2 mr-2 text-white transition duration-300 ease-in-out bg-blue-600 rounded hover:bg-blue-800"
+                  >View
                   </a>
                   <a
-                    href={item.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    onClick={() => deleteItem(item.name)}
                     className="p-2 text-white transition duration-300 ease-in-out bg-red-600 rounded hover:bg-red-800"
-                  >Remove
+                  >X
                   </a>
                 </div>
 
               ) : (
-                <span className="text-red-500 dark:text-red-400">No URL available</span>
+                <span className="text-red-600 dark:text-red-400">No URL available</span>
               )}
             </li>
           ))}
