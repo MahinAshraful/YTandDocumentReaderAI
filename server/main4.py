@@ -1,4 +1,5 @@
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.document_loaders import YoutubeLoader
 from langchain_community.document_loaders import PyPDFLoader
 from tenacity import retry, stop_after_attempt, wait_fixed
 from sklearn.metrics.pairwise import cosine_similarity
