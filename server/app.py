@@ -28,20 +28,6 @@ def serve(path):
     print(f"Serving index.html")
     return send_from_directory(client_dist_folder, 'index.html')
 
-@app.route('/perform_pdf_rag', methods=['POST'])
-def pdf_link_endpoint():
-    data = request.json
-    query = data.get('query')
-    pdf_path = data.get('pdf_path')
-    
-    if not query or not pdf_path:
-        return jsonify({'error': 'Missing query or pdf_path'}), 400
-    
-    try:
-        result = main4.perform_pdf_rag(query, pdf_path)
-        return jsonify({'result': result})
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
 
 @app.route('/perform_yt_rag', methods=['POST'])
 def rag_endpoint():
@@ -59,6 +45,24 @@ def rag_endpoint():
         import traceback
         error_details = traceback.format_exc()
         return jsonify({'error': str(e), 'details': error_details}), 500
+
+
+
+@app.route('/perform_pdf_rag', methods=['POST'])
+def pdf_link_endpoint():
+    data = request.json
+    query = data.get('query')
+    pdf_path = data.get('pdf_path')
+    
+    if not query or not pdf_path:
+        return jsonify({'error': 'Missing query or pdf_path'}), 400
+    
+    try:
+        result = main4.perform_pdf_rag(query, pdf_path)
+        return jsonify({'result': result})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 
 
 if __name__ == "__main__":
