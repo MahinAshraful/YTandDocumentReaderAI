@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: docandytreaderai
+    env: python
+    buildCommand: |
+      # Install server dependencies
+      cd server
+      pip install -r requirements.txt
+      # Install and build client
+      cd ../client
+      npm install
+      npm run build
+      # Move back to root
+      cd ..
+    startCommand: cd server && gunicorn app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: NODE_VERSION
+        value: 22.5.1
