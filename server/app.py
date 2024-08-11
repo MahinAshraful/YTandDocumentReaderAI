@@ -5,7 +5,7 @@ import main3
 import main4
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": os.environ.get('ALLOWED_ORIGIN', '*')}})
+CORS(app, resources={r"/*": {"origins": '*'}})
 
 # Assuming your Flask app is in the 'server' folder
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
