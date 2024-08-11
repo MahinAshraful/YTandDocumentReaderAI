@@ -20,7 +20,7 @@ function RAGytQueryComponent() {
     try {
       const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/perform_yt_rag`, { query, link });
       setResult(response.data.result);
-      
+
       updateRecentQueries();
     } catch (error) {
       if (error.response) {
@@ -42,7 +42,7 @@ function RAGytQueryComponent() {
   };
 
   return (
-    <div className="p-6 mx-auto bg-gray-100 rounded-lg shadow-md">
+    <div className="p-6 mx-auto bg-gray-100 rounded-lg shadow-md shadow-gray-400">
       <h1 className="mb-6 text-3xl font-bold text-center">Youtube Reader</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
@@ -51,7 +51,7 @@ function RAGytQueryComponent() {
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Enter your query"
           required
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
         />
         <input
           type="text"
@@ -59,12 +59,12 @@ function RAGytQueryComponent() {
           onChange={(e) => setLink(e.target.value)}
           placeholder="Enter YouTube link"
           required
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
         />
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full px-4 py-2 text-white transition duration-300 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+          className="w-full transition duration-300 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
         >
           {isLoading ? 'Processing...' : 'Submit'}
         </button>
@@ -82,7 +82,7 @@ function RAGytQueryComponent() {
       <div className="mt-8">
         <button
           onClick={() => setShowTips(!showTips)}
-          className="text-blue-500 transition duration-300 hover:text-blue-700"
+          className="text-blue-600 transition duration-300 hover:text-blue-700"
         >
           {showTips ? 'Hide' : 'How to use'}
         </button>
