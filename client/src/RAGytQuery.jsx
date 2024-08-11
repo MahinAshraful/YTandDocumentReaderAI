@@ -18,8 +18,9 @@ function RAGytQueryComponent() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await axios.post('http://127.0.0.1:5000/perform_yt_rag', { query, link });
+      const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/perform_yt_rag`, { query, link });
       setResult(response.data.result);
+      
       updateRecentQueries();
     } catch (error) {
       console.error('Error:', error);

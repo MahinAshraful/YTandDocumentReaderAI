@@ -18,7 +18,7 @@ function RAGpdfQueryComponent() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await axios.post('http://127.0.0.1:5000/perform_pdf_rag', { query, pdf_path });
+      const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/perform_pdf_rag`, { query, pdf_path });
       setResult(response.data.result);
       updateRecentQueries();
     } catch (error) {
@@ -35,7 +35,7 @@ function RAGpdfQueryComponent() {
   };
 
   return (
-    <div className="p-6 mx-auto bg-gray-100 rounded-b-lg  shadow-md">
+    <div className="p-6 mx-auto bg-gray-100 rounded-b-lg shadow-md">
       <h1 className="mb-6 text-3xl font-bold text-center">File Reader</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
