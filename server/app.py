@@ -1,16 +1,29 @@
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, send_from_directory, request, jsonify
 from flask_cors import CORS
+import os
 import main3
 import main4
-import os
 
 app = Flask(__name__)
 CORS(app)
 
-client_folder = os.path.join(os.getcwd(),"..","client")
-dist_folder = os.path.join(client_folder,"dist")
+# Assuming your Flask app is in the 'server' folder
+client_dist_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'client', 'dist'))
 
-@app.route("/", defaults={"filename": ""})
+@app.route("/", defaults={'path': ''})
+@app.route("/<path:path>")
+def serve(path):
+    print(f"Requested path: {path}")
+    if path and path.startswith("assets/"):
+        file_path = os.path.join(client_dist_folder, path)
+        directory, file_name = os.path.split(file_path)
+        print(f"Serving asset: {file_path}")
+        print(f"File exists: {os.path.exists(file_path)}")
+        if os.path.exists(file_path):
+            return send_from_directory(directory, file_name)
+    
+    print(f"Serving index.html")
+    return send_from_directory(client_dist_folder, 'index.html')
 
 @app.route('/perform_pdf_rag', methods=['POST'])
 def pdf_link_endpoint():
@@ -27,8 +40,6 @@ def pdf_link_endpoint():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-
-
 @app.route('/perform_yt_rag', methods=['POST'])
 def rag_endpoint():
     data = request.json
@@ -43,9 +54,6 @@ def rag_endpoint():
         return jsonify({'result': result})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
 
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)
