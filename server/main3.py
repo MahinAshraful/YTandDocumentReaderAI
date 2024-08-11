@@ -19,7 +19,6 @@ def perform_yt_rag(query, link):
         openai_api_key = os.getenv('OPENAI_API_KEY')
         os.environ['PINECONE_API_KEY'] = pinecone_api_key
         os.environ['OPENAI_API_KEY'] = openai_api_key
-        print(pinecone_api_key)
         return OpenAIEmbeddings(), "text-embedding-3-small", OpenAI()
 
     def initialize_text_splitter():
