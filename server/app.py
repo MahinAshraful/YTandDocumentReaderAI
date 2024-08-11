@@ -55,7 +55,10 @@ def rag_endpoint():
         result = main3.perform_yt_rag(query, link)
         return jsonify({'result': result})
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        import traceback
+        error_details = traceback.format_exc()
+        return jsonify({'error': str(e), 'details': error_details}), 500
+
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))

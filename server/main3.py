@@ -82,19 +82,44 @@ def perform_yt_rag(query, link):
 
     # Main execution
     try:
-        print("Starting RAG process...")
+        print(f"Starting RAG process for query: {query} and link: {link}")
+        
+        # Initialize APIs
         embeddings, embed_model, openai_client = initialize_apis()
+        print("APIs initialized successfully")
+
+        # Initialize text splitter
         text_splitter = initialize_text_splitter()
+        print("Text splitter initialized")
+
+        # Load and split YouTube data
         texts = load_and_split_youtube_data()
+        print(f"Loaded and split {len(texts)} text chunks from YouTube")
+
         time.sleep(3)  # Give some time for background processes to complete
+
+        # Initialize vectorstore
         vectorstore_from_texts = initialize_vectorstore(texts)
+        print("Vectorstore initialized")
+
         time.sleep(3)  # Give some time for vectorstore to be ready
+
+        # Perform query
         augmented_query = perform_query()
+        print("Query performed and augmented")
+
+        # Get OpenAI answer
         openai_answer = get_openai_answer(augmented_query)
-        print("RAG process completed")
+        print("Received answer from OpenAI")
+
+        print("RAG process completed successfully")
         return openai_answer
     except Exception as e:
-        return e
+        error_message = f"Error in perform_yt_rag: {str(e)}"
+        print(error_message)
+        import traceback
+        print(traceback.format_exc())
+        raise Exception(error_message)
 
 # Example usage
 

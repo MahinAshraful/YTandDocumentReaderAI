@@ -9,6 +9,7 @@ from pinecone import Pinecone
 from openai import OpenAI
 import numpy as np
 import tiktoken
+import logginq
 import time
 import os
 load_dotenv()
