@@ -12,7 +12,7 @@ services:
       npm run build
       # Move back to root
       cd ..
-    startCommand: cd server && gunicorn app:app
+    startCommand: cd server && gunicorn wsgi:app
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.9
