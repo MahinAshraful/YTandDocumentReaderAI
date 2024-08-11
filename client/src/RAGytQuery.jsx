@@ -23,7 +23,13 @@ function RAGytQueryComponent() {
 
       updateRecentQueries();
     } catch (error) {
-      console.error('Error:', error);
+      if (error.response) {
+        console.error('Server responded with an error:', error.response.data);
+      } else if (error.request) {
+        console.error('No response received:', error.request);
+      } else {
+        console.error('Error setting up the request:', error.message);
+      }
       setResult('An error occurred while processing your request.');
     }
     setIsLoading(false);
