@@ -4,6 +4,7 @@ from flask_cors import CORS
 import os
 import main3
 import main4
+import time
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": '*'}})
@@ -50,6 +51,7 @@ def rag_endpoint():
 
 @app.route('/perform_pdf_rag', methods=['POST'])
 def pdf_link_endpoint():
+    time.sleep(3)
     data = request.json
     query = data.get('query')
     pdf_path = data.get('pdf_path')

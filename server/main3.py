@@ -28,8 +28,8 @@ def perform_yt_rag(query, link):
             tokens = tokenizer.encode(text, disallowed_special=())
             return len(tokens)
         return RecursiveCharacterTextSplitter(
-            chunk_size=1500,
-            chunk_overlap=75,
+            chunk_size=500,
+            chunk_overlap=50,
             length_function=tiktoken_len,
             separators=["\n\n", "\n", " ", ""]
         )
@@ -66,14 +66,14 @@ def perform_yt_rag(query, link):
             model="text-embedding-3-small"
         )
         query_embedding = raw_query_embedding.data[0].embedding
-        top_matches = pinecone_index.query(vector=query_embedding, top_k=10, include_metadata=True, namespace=link)
+        top_matches = pinecone_index.query(vector=query_embedding, top_k=5, include_metadata=True, namespace=link)
         contexts = [item['metadata']['text'] for item in top_matches['matches']]
         return "<CONTEXT>\n" + "\n\n-------\n\n".join(contexts[:10]) + "\n-------\n</CONTEXT>\n\n\n\nMY QUESTION:\n" + query
 
     def get_openai_answer(augmented_query):
         primer = """You are a personal assistant. Answer any questions I have about the Youtube Video provided."""
         res = openai_client.chat.completions.create(
-            model="gpt-4",
+            model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": primer},
                 {"role": "user", "content": augmented_query}
