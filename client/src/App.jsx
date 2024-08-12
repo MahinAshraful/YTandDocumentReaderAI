@@ -58,7 +58,7 @@ function App() {
         </header>
 
         {showIntro && (
-          <div className="p-6 mb-8 bg-blue-100 rounded-lg shadow-md dark:bg-blue-700 animate-fade-in">
+          <div className="p-6 mb-8 bg-blue-100 rounded-lg shadow-md animate-fade-in">
             <h2 className="mb-4 text-2xl font-semibold">Welcome to the RAG Query System!</h2>
             <p className="mb-4">
               This system allows you to ask questions about YouTube videos or PDFs using advanced AI technology.
@@ -66,7 +66,7 @@ function App() {
             </p>
             <button
               onClick={() => setShowIntro(false)}
-              className="text-blue-600 dark:text-blue-400 hover:underline"
+              className="text-blue-600 hover:underline"
             >
               Got it, thanks!
             </button>

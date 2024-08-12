@@ -55,7 +55,7 @@ const UploadPDFButton = ({ onUploadSuccess }) => {
         htmlFor="dropzone-file"
         onDrop={handleDrop}
         onDragOver={handleDragOver}
-        className="flex flex-col items-center justify-center w-full h-50 border-2 border-gray-500 border-dashed rounded-lg cursor-pointer bg-gray-200 dark:hover:bg-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:hover:border-gray-500"
+        className="flex flex-col items-center justify-center w-full h-50 border-2 border-gray-500 border-dashed rounded-lg cursor-pointer bg-gray-200 dark:border-gray-600 dark:hover:border-gray-500"
       >
         <div className="flex flex-col items-center justify-center pt-5 pb-6">
           <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
