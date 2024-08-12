@@ -1,13 +1,12 @@
 from langchain_community.document_loaders import YoutubeLoader
 from flask import Flask, send_from_directory, request, jsonify
 from flask_cors import CORS
-import os
 import main3
 import main4
 import time
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 
