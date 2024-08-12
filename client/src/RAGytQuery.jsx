@@ -87,7 +87,7 @@ function RAGytQueryComponent() {
           {showTips ? 'Hide' : 'How to use'}
         </button>
         {showTips && (
-          <div className="p-4 mt-2 rounded-md bg-blue-50 animate-fade-in">
+          <div className="p-4 mt-2 rounded-md bg-blue-100 animate-fade-in">
             <h4 className="mb-2 font-semibold">How to use:</h4>
             <ul className="space-y-1 text-sm list-disc list-inside">
               <li>Enter the your question in the first box</li>

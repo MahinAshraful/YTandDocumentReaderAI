@@ -9,7 +9,7 @@ function App() {
   const [theme, setTheme] = useState('light');
   const [showIntro, setShowIntro] = useState(true);
   const [recentQueries, setRecentQueries] = useState([]);
-
+  const [updateTrigger, setUpdateTrigger] = useState(0);
 
   const bucketName = 'your-bucket-name';
 
@@ -37,7 +37,9 @@ function App() {
     localStorage.setItem('recentQueries', JSON.stringify(updatedQueries));
   };
 
-
+  const handleUploadSuccess = () => {
+    setUpdateTrigger(prev => prev + 1);
+  };
 
 
 
@@ -71,11 +73,13 @@ function App() {
           </div>
         )}
 
-        <UploadPDFButton></UploadPDFButton>
+        <UploadPDFButton onUploadSuccess={handleUploadSuccess} />
         <br />
         <div>
-          <BucketItems></BucketItems>
-          <RAGpdfQueryComponent onQuerySubmit={(query) => addRecentQuery(query, 'PDF')} />
+          <RAGpdfQueryComponent
+            onQuerySubmit={(query) => addRecentQuery(query, 'PDF')}
+            onUploadSuccess={handleUploadSuccess}
+          />
         </div>
         <br />
         <RAGytQueryComponent onQuerySubmit={(query) => addRecentQuery(query, 'YouTube')} />
